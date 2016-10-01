@@ -3,10 +3,16 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentVideo: exampleVideoData[0],
-      allVideos: exampleVideoData
+      allVideos: []
     };
   }
 
+  componentDidMount() {
+    this.props.searchYouTube({key: 'AIzaSyDXUp0ge_3OwhuELENgq3nraCLxemrEWm4', query: 'react', max: 5}, function(videos) {
+      this.setState({allVideos: videos});
+    }.bind(this));
+  } 
+  
   clickHandler (video) {
     this.setState({
       currentVideo: video
@@ -14,18 +20,19 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        <Nav />
-        <div className="col-md-7">
-          <VideoPlayer video={this.state.currentVideo}/>
+    if (this.state.allVideos) {
+      return (
+        <div>
+          <Nav />
+          <div className="col-md-7">
+            <VideoPlayer video={this.state.currentVideo}/>
+          </div>
+          <div className="col-md-5">
+            <VideoList videos={this.state.allVideos} clickHandler={this.clickHandler.bind(this)}/>
+          </div>
         </div>
-        <div className="col-md-5">
-          <VideoList videos={exampleVideoData} clickHandler={this.clickHandler.bind(this)}/>
-        </div>
-      </div>
-    );
-    
+      );
+    }
   }
 }
 
