@@ -15,9 +15,6 @@ var searchYouTube = (options, callback) => {
     success: function(data) {
       console.log(data);
       callback(data.items);
-      return data.items;
-
-      // this.setState({allVideos: data.items});
     },
     fail: function(data) {
       console.log('error');
