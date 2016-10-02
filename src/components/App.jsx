@@ -3,8 +3,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentVideo: exampleVideoData[0],
-      allVideos: [],
-      // targetSearch: 'react'
+      allVideos: []
     };
   }
 
@@ -17,10 +16,6 @@ class App extends React.Component {
       this.setState({currentVideo: videos[0], allVideos: videos});
     }.bind(this));
   }
-
-  // searchHandler(newSearch) {
-  //   this.setState({targetSearch: newSearch});
-  // }
   
   clickHandler (video) {
     this.setState({
